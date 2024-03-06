@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { CITY } from "../constants";
+import { MdDateRange } from "react-icons/md";
+import Spinner from "./Spinner";
 
 export const Weather = () => {
   const [city, setCity] = useState("Ho Chi Minh");
@@ -39,7 +41,7 @@ export const Weather = () => {
 
   return (
     <div className="bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 p-5 min-h-screen">
-  <h1 className="font-bold text-center text-4xl text-white mb-5">Weather App</h1>
+  <h1 className="font-bold text-center text-4xl text-black mb-5">Weather App</h1>
   <div className="flex justify-center mb-5">
   <select
   onChange={(e) => setCity(e.target.value)}
@@ -55,12 +57,12 @@ export const Weather = () => {
   </div>
  
   {loading ? (
-    <div className="flex justify-center">
-    <h1 className="text-white">Data is Loading....</h1>
+    <div className="flex justify-center ">
+    <Spinner/>
     </div>
   ) : weather && forecast ? (
-    <div className="flex justify-center">
-      <div className="bg-white rounded-lg shadow-lg p-5 mr-5">
+    <div className="flex justify-center flex-wrap space-y-5 ">
+      <div className="bg-white rounded-lg shadow-lg p-5 mr-5 border-2 border-black">
         <h2 className="text-xl font-semibold mb-2">Current Weather</h2>
         <h3 className="mb-2">
           City: <span className="text-teal-500">{weather.name}</span>
@@ -77,10 +79,10 @@ export const Weather = () => {
       </div>
       <div className="bg-white rounded-lg shadow-lg p-5">
         <h1 className="text-xl text-center font-semibold mb-2">Next three Days weather</h1>
-        <div className="flex justify-between">
+        <div className="flex justify-around flex-wrap">
           {arr.map((index) => (
-            <div key={index} className=" bg-white rounded-lg shadow-lg p-3">
-              <p>Date: {forecast.list[index].dt_txt.split(" ")[0]}</p>
+            <div key={index} className=" bg-white border-2 border-black  rounded-lg shadow-lg p-3 m-2">
+            <p>Date:{forecast.list[index].dt_txt.split(" ")[0]}</p>
               <p>Temperature: {forecast.list[index].main.temp} °C</p>
               <p>Description: {forecast.list[index].weather[0].description}</p>
               <img
